@@ -1,13 +1,333 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --color-light-text: #d7e0ff;
+  --color-dark-text: #2d2f43;
+  --color-body: #1e2140;
+  --color-inner-circle: #151932;
+  --color-blur: #262a57;
+  --color-red: #fd6f6b;
+  --color-blue: #6ff3f8;
+  --color-pink: #d981f9;
+  --color-number-background: #eef1fa;
+  --color-selected-text: var(--color-inner-circle);
+  --color-unselected-text: #626682;
+  --color-modale-bg: #ffffff;
+  --timer: 30;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root,
+:root.red {
+  --color-theme: var(--color-red);
+}
+
+
+:root.blue {
+  --color-theme: var(--color-blue);
+}
+
+
+:root.pink {
+  --color-theme: var(--color-pink);
+}
+
+:root,
+:root.font-a {
+  --font-theme: 'Roboto', monospace;
+  --color-text: var(--color-light-text);
+  --color-bg: var(--color-dark-text);
+}
+
+:root.font-b {
+  --font-theme: 'B612 Mono', sans-serif;
+  --color-text: var(--color-light-text);
+  --color-bg: var(--color-dark-text);
+}
+
+:root.font-c {
+  --font-theme: 'Ubuntu Mono', monospace;
+  --color-text: var(--color-light-text);
+  --color-bg: var(--color-dark-text);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  background: var(--color-body);
+  font-family: var(--font-theme);
+  overflow: hidden;
+  margin: 0;
+}
+
+img {
+  position: relative;
+  top: -550px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.active-cycle, .inactive-bg, .sliding-holder {
+  position: relative;
+  display: flex;
+  width: 50vw;
+  min-width: 400px;
+  max-width: 440px;
+  justify-content: space-between;
+}
+
+.inactive-bg {
+  position: relative;
+  background-color: var(--color-inner-circle);
+  border-radius: 50px;
+  z-index: -1;
+  top: -41px;
+}
+
+h1 {
+  position: relative;
+  top: -600px;
+  font-size: 3em;
+  font-weight: 700;
+  letter-spacing: 4px;
+  height: 150px;
+  width: 150px;
+  max-width: 150px;
+  line-height: 3em;
+  text-align: center;
+  background: transparent;
+  color: var(--color-light-text);
+  border-radius: 50%;
+}
+
+h2 {
+  color: var(--color-light-text);
+}
+
+h3, .inactive, .sliding-color {
+  position: relative;
+  background-color: transparent;
+  color: var(--color-light-text);
+  border-radius: 50px;
+  padding: 10px 0px;
+  width: 130px;
+  height: 21px;
+  text-align: center;
+  margin: 0;
+}
+
+h4 {
+  position: relative;
+  top: -690px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--color-light-text);
+}
+
+h5 {
+  color: var(--color-dark-text);
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.active {
+  animation: change-color 0s 1s forwards;
+}
+
+.start {
+  color: var(--color-dark-text);
+}
+
+@keyframes change-color {
+  to {color: var(--color-dark-text)}
+}
+
+/* Active cycle */
+.sliding-color {
+  background-color: var(--color-theme);
+  top: -82px;
+  left: 0;
+  z-index: -1;
+  /* animation: done in js */
+}
+
+@keyframes move-short {
+  from {left: 0}
+  to {left: calc(50% - 65px)}
+}
+
+@keyframes move-long {
+  from {left: 0}
+  to {left: calc(100% - 130px)}
+}
+
+@keyframes move-pomodoro {
+  from {left: calc(50% - 65px)}
+  to {left: 0}
+}
+
+@keyframes move-pomodoro-long {
+  from {left: calc(100% - 130px)}
+  to {left: 0}
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Blur outside progress bar */
+.a {
+  height: 260px;
+  width: 260px;
+  border-radius:50%;
+  background-color: transparent;
+  box-shadow: 28px 28px 20px 30px var(--color-blur);
+  rotate: var(--angle);
+  animation: animate var(--timer) linear infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Outer gradient outside progress bar */
+.b {
+  height: 220px;
+  width: 220px;
+  background: linear-gradient(var(--color-body), var(--color-body)) padding-box,
+              linear-gradient(180deg, var(--color-blur), var(--color-body)) border-box;
+  border: 20px solid transparent;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Circle outside progress bar */
+.c {
+  height: 222px;
+  width: 222px;
+  border-radius:50%;
+  background-color: var(--color-inner-circle);
+}
+
+
+/* Progress bar (border) */
+.d {
+  position: relative;
+  height: 222px;
+  width: 222px;
+  top: -240px;
+  left: 20px;
+  border-radius:50%;
+  background: conic-gradient(
+      var(--color-theme) var(--angle), transparent var(--angle));
+  animation: animate var(--timer) linear infinite;
+  border: 15px var(--color-inner-circle) solid;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Circle inside progress bar */
+.e {
+  height: 166px;
+  width: 166px;
+  border-radius:50%;
+  background-color: var(--color-inner-circle);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Rectangle for placements of start and end dot */
+.f, .h {
+  height: 141px;
+  width: 141px;
+  /* background-color: blue; */
+  background-color: transparent;
+  rotate: calc(var(--angle) + 44deg);
+  animation: animate var(--timer) linear infinite;
+}
+
+/* Rotation of rectangle and dot in end of progress bar */
+@keyframes animate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Dot in each end of progress bar */
+.g, .i {
+  height: 4px;
+  width: 4px;
+  position: relative;
+  content: ' ';
+  background-color: var(--color-theme);
+  border: 5px solid var(--color-theme);
+  border-radius: 50%;
+}
+
+/* Position of sqare with start dot */
+.h {
+  position: relative;
+  top: -421px;
+  rotate: 45deg;
+  animation: none;
+}
+
+.main-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal {
+  position: absolute;
+  background: var(--color-modale-bg);
+  top: 400px;
+  /* z-index: 1; */
+  width: 400px;
+  height: 300px;
+  display: flex;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.line {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  margin: 10%;
+  align-items: center;
+}
+
+.choises {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.red {
+  background: var(--color-red);
+}
+
+.blue {
+  background: var(--color-blue);
+}
+
+.pink {
+  background: var(--color-pink);
 }
