@@ -9,11 +9,18 @@
   --color-pink: #d981f9;
   --color-number-background: #eef1fa;
   --color-selected-text: var(--color-inner-circle);
+  --color-grey-text: #bebfc3;
   --color-unselected-text: #626682;
+  --color-input-bg: #eef1fa;
   --color-modale-bg: #ffffff;
+  --color-arrow: grey;
+  --font-1: 'Roboto', monospace;
+  --font-2: 'B612 Mono', sans-serif;
+  --font-3: 'Ubuntu Mono', monospace;
   --timer: 30;
 }
 
+/* Color schemes */
 :root,
 :root.red {
   --color-theme: var(--color-red);
@@ -29,23 +36,21 @@
   --color-theme: var(--color-pink);
 }
 
+/* Font schemes */
 :root,
 :root.font-a {
-  --font-theme: 'Roboto', monospace;
-  --color-text: var(--color-light-text);
-  --color-bg: var(--color-dark-text);
+  --font-theme: var(--font-1);
+  --font: " (Roboto)"
 }
 
 :root.font-b {
-  --font-theme: 'B612 Mono', sans-serif;
-  --color-text: var(--color-light-text);
-  --color-bg: var(--color-dark-text);
+  --font-theme: var(--font-2);
+  --font: " (B612 Mono)"
 }
 
 :root.font-c {
-  --font-theme: 'Ubuntu Mono', monospace;
-  --color-text: var(--color-light-text);
-  --color-bg: var(--color-dark-text);
+  --font-theme: var(--font-3);
+  --font: " (Ubuntu Mono)"
 }
 
 body {
@@ -57,6 +62,7 @@ body {
   margin: 0;
 }
 
+/* Icon for settings */
 img {
   position: relative;
   top: -550px;
@@ -64,6 +70,7 @@ img {
   cursor: pointer;
 }
 
+/* Heading with current active cycle */
 .active-cycle, .inactive-bg, .sliding-holder {
   position: relative;
   display: flex;
@@ -73,6 +80,7 @@ img {
   justify-content: space-between;
 }
 
+/* Dark background for the heading */
 .inactive-bg {
   position: relative;
   background-color: var(--color-inner-circle);
@@ -81,6 +89,7 @@ img {
   top: -41px;
 }
 
+/* The counter */
 h1 {
   position: relative;
   top: -600px;
@@ -97,10 +106,17 @@ h1 {
   border-radius: 50%;
 }
 
+/* Heading in main screen and modal */
 h2 {
   color: var(--color-light-text);
 }
 
+/* Color for heading in modal */
+.h2-settings {
+  color: var(--color-dark-text);
+}
+
+/* Text in "sliding header" */
 h3, .inactive, .sliding-color {
   position: relative;
   background-color: transparent;
@@ -111,8 +127,10 @@ h3, .inactive, .sliding-color {
   height: 21px;
   text-align: center;
   margin: 0;
+  font-size: 1em;
 }
 
+/* Text below counter */
 h4 {
   position: relative;
   top: -690px;
@@ -124,20 +142,30 @@ h4 {
   color: var(--color-light-text);
 }
 
+/* Most text in modal */
 h5 {
   color: var(--color-dark-text);
   cursor: pointer;
   text-transform: uppercase;
 }
 
+/* Small text in modal */
+h6 {
+  margin: 10px 0 5px;
+  color: var(--color-grey-text);
+}
+
+/* Change color of active cycle in header */
 .active {
   animation: change-color 0s 1s forwards;
 }
 
+/* Start text color in header */
 .start {
   color: var(--color-dark-text);
 }
 
+/* Change to dark color in active cycle in header */
 @keyframes change-color {
   to {color: var(--color-dark-text)}
 }
@@ -151,6 +179,7 @@ h5 {
   /* animation: done in js */
 }
 
+/* 5 different animations for the header showing active cycle */
 @keyframes move-short {
   from {left: 0}
   to {left: calc(50% - 65px)}
@@ -171,6 +200,11 @@ h5 {
   to {left: 0}
 }
 
+@keyframes move-home {
+  to {left: 0}
+}
+
+/* Definition of the angle variable */
 @property --angle {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -184,8 +218,8 @@ h5 {
   border-radius:50%;
   background-color: transparent;
   box-shadow: 28px 28px 20px 30px var(--color-blur);
-  rotate: var(--angle);
-  animation: animate var(--timer) linear infinite;
+  rotate: calc(var(--angle) + 45deg);
+  animation: animate var(--timer) linear;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -196,7 +230,7 @@ h5 {
   height: 220px;
   width: 220px;
   background: linear-gradient(var(--color-body), var(--color-body)) padding-box,
-              linear-gradient(180deg, var(--color-blur), var(--color-body)) border-box;
+              linear-gradient(125deg, var(--color-blur), var(--color-body)) border-box;
   border: 20px solid transparent;
   border-radius: 50%;
   display: flex;
@@ -223,7 +257,7 @@ h5 {
   border-radius:50%;
   background: conic-gradient(
       var(--color-theme) var(--angle), transparent var(--angle));
-  animation: animate var(--timer) linear infinite;
+  animation: animate var(--timer) linear;
   border: 15px var(--color-inner-circle) solid;
   box-sizing: border-box;
   display: flex;
@@ -244,12 +278,12 @@ h5 {
 
 /* Rectangle for placements of start and end dot */
 .f, .h {
-  height: 141px;
-  width: 141px;
-  /* background-color: blue; */
+  height: 139.5px;
+  width: 139.5px;
+  background-color: blue;
   background-color: transparent;
-  rotate: calc(var(--angle) + 44deg);
-  animation: animate var(--timer) linear infinite;
+  rotate: calc(var(--angle) + 45deg);
+  animation: animate var(--timer) linear;
 }
 
 /* Rotation of rectangle and dot in end of progress bar */
@@ -261,8 +295,8 @@ h5 {
 
 /* Dot in each end of progress bar */
 .g, .i {
-  height: 4px;
-  width: 4px;
+  height: 3px;
+  width: 3px;
   position: relative;
   content: ' ';
   background-color: var(--color-theme);
@@ -278,38 +312,131 @@ h5 {
   animation: none;
 }
 
+/* Flexbox for the complete app */
 .main-display {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* The modal for settings*/
 .modal {
   position: absolute;
   background: var(--color-modale-bg);
-  top: 400px;
-  /* z-index: 1; */
+  top: 120px;
+  /* left: 1000px; */
+  z-index: 1;
   width: 400px;
-  height: 300px;
+  min-height: 300px;
   display: flex;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
+  font-family: 'Roboto', monospace;
 }
 
+/* The "x" at the end of heading in modal */
+.close {
+  color: #a6a5ab;
+  cursor: pointer;
+}
+
+/* Each line in the modal */
 .line {
   width: 80%;
   display: flex;
   justify-content: space-between;
-  margin: 10%;
+  margin: 0 10%;
   align-items: center;
+  gap: 20px;
 }
 
+/* Placement for small text and setting of each timer */
+.line2 {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Line with buttons at the bottom of modal */
+.line3 {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Buttons at bottom in modal */
+.button-2 {
+  background-color: var(--color-theme);
+  padding: 7px;
+  border-radius: 10px;
+}
+
+.button-2:hover {
+  outline: 3px solid var(--color-body)
+}
+
+/* Horizontal line at top in modal */
+.hr-top {
+  width: 100%;
+}
+
+/* Other horizontal lines in modal */
+hr {
+  width: 80%;
+  background-color: #f7f7f7;
+  box-sizing: border-box;
+}
+
+/* All input fields in modal */
+input {
+  background-color: var(--color-input-bg);
+  color: var(--color-dark-text);
+  width: 80px;
+  border: none;
+  outline: none;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* Wrapper for increment and decrement in input */
+.number-wrapper {
+  position: relative;
+}
+
+/* Increment and decrement symbols */
+.spantop,
+.spanbottom {
+  position: absolute;
+  right: 4px;
+  height: .5em;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--color-arrow);
+  transform: rotate(90deg);
+  cursor: pointer;
+}
+
+.spantop:hover,
+.spanbottom:hover {
+  color: black;
+}
+
+/* Placement of increment symbol */
+.spantop {
+  top: 2px;
+}
+
+/* Placement of decrement symbol */
+.spanbottom {
+  bottom: 2px;
+}
+
+/* 3 circular buttons */
 .choises {
   display: flex;
   gap: 10px;
 }
 
+/* Each circular button */
 .button {
   width: 30px;
   height: 30px;
@@ -320,14 +447,76 @@ h5 {
   cursor: pointer;
 }
 
-.red {
+/* Fonts used in each font button */
+.button-a {
+  font-family: var(--font-1);
+}
+
+.button-b {
+  font-family: var(--font-2);
+}
+
+.button-c {
+  font-family: var(--font-3);
+}
+
+/* Color of seleced font button */
+.selected {
+  color: white;
+  background-color: black;
+}
+
+/* Placement of fontname after "FONT" */
+.fontname::after {
+  content: var(--font);
+}
+
+/* Color of unselected font buttons */
+.unselected {
+  color: var(--color-dark-text);
+  background-color: var(--color-input-bg);
+}
+
+/* Color of color buttons */
+.red-dot {
   background: var(--color-red);
 }
 
-.blue {
+.blue-dot {
   background: var(--color-blue);
 }
 
-.pink {
+.pink-dot {
   background: var(--color-pink);
+}
+
+/* Color of tag in selected color button */
+.tagged {
+  color: black;
+}
+
+/* Color of tag in unselected color buttons */
+.untagged {
+  color: transparent;
+}
+
+/* Some few changes for small screens */
+@media (max-width: 420px) {
+  .body {
+    overflow: unset;
+  }
+  
+  .modal {
+      width: 100%;
+      border-radius: 0;
+  }
+
+  .active-cycle,
+  .inactive-bg,
+  .sliding-holder
+   {
+    max-width: unset;
+    width: 95%;
+    min-width: unset;
+  }
 }
