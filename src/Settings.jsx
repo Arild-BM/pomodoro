@@ -61,7 +61,7 @@ function Settings({setSettings, pomodoro, setPomodoro, longbreak,
             <hr></hr>
             {/* Setting of work periodes */}
             <div className = "line">
-                <h5>Number of work periodes</h5>
+                <h5>Number of work periods</h5>
                 <Input inputType = {nbrPodomoroTmp} setTimer = {setNbrPodomoroTmp} max = {10} />
             </div>
             <hr></hr>

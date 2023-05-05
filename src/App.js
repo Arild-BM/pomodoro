@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import Settings from "./Settings"
 import settings_icon from "./pictures/settings.svg"
 
-let minute = 1
+let minute = 60       // Antall sekunder i et minutt, kan endres til et lavere tall for testing
 
-let pomodoroInit = 55 * minute
-let shortbreakInit = 5 * minute
-let longbreakInit = 30 * minute
-let numberOfPomodoro = 8
-let numberOfShortbreaks = 3
-let currentShortbreak = numberOfShortbreaks
-let breaktype = "Pomodoro"
-let currentPomodoro  = numberOfPomodoro
-let timer = pomodoroInit
+let pomodoroInit = 55 * minute    // Lengden på en arbeidsperiode
+let shortbreakInit = 5 * minute   // Lengden på kort pause
+let longbreakInit = 30 * minute   // Lengden på lang pause
+let numberOfPomodoro = 8          // Antall arbeidsperioder
+let numberOfShortbreaks = 3       // Antall korte pauser før lang pause
+let currentShortbreak = numberOfShortbreaks // Nedtelling av korte pauser før lang pause
+let breaktype = "Pomodoro"        // Viser aktiv syklus
+let currentPomodoro  = numberOfPomodoro   // Nedtelling av arbeidsperioder
+let timer = pomodoroInit          // Nedtelling starter med lengden på arbeidsperiode
 
 setInterval(() => timer--, 1000)
 
@@ -21,16 +21,17 @@ document.documentElement.style.setProperty('--timer', timer+"s");
 
 function App() {
   
-  const [timeLeft, setTimeLeft] = useState(timer)
-  const [settings, setSettings] = useState(false)
-  const [pomodoro, setPomodoro] = useState(pomodoroInit)
-  const [shortbreak, setShortbreak] = useState(shortbreakInit)
-  const [longbreak, setLongbreak] = useState(longbreakInit)
-  const [nbrshortbreak, setNbrshortbreak] = useState(numberOfShortbreaks)
-  const [nbrPodomoro, setNbrPodomoro] = useState(numberOfPomodoro)
-  const [resetTimer, setResetTimer] = useState(false)
-  const [restart, setRestart] = useState(0)
+  const [timeLeft, setTimeLeft] = useState(timer)                           // Tid som er igjen av aktiv syklus
+  const [settings, setSettings] = useState(false)                           // Vise modal for settings
+  const [pomodoro, setPomodoro] = useState(pomodoroInit)                    // Lengde på arbeidsperiode
+  const [shortbreak, setShortbreak] = useState(shortbreakInit)              // Lengden på kort pause
+  const [longbreak, setLongbreak] = useState(longbreakInit)                 // Lengden på lang pause
+  const [nbrshortbreak, setNbrshortbreak] = useState(numberOfShortbreaks)   // Antall korte pauser før lang pause
+  const [nbrPodomoro, setNbrPodomoro] = useState(numberOfPomodoro)          // Antall arbeidsperioder
+  const [resetTimer, setResetTimer] = useState(false)                       // Variabel for å resette applikasjon
+  const [restart, setRestart] = useState(0)                                 // Variabel for å restarte applikasjon
 
+// Nedtelling og hovedskjerm
 useEffect(() => {
   let timeoutId = setTimeout(() => {
     if (timer <= 0) {
@@ -132,6 +133,7 @@ useEffect(() => {
   // eslint-disable-next-line
 }, [timer, restart])
 
+// Bilde i hovedskjerm
   return (
     <div className="main-display">
       {settings && <Settings
@@ -152,9 +154,9 @@ useEffect(() => {
       />}
       <h2>pomodoro</h2>
       <div className="active-cycle">
-        <h3 className="pomodoro start">Pomodoro {currentPomodoro > 0 ? currentPomodoro : null}</h3>
-        <h3 className="short-break">Short break {breaktype === "Short Break" ? currentShortbreak + 1 : null}</h3>
-        <h3 className="long-break">Long break</h3>
+        <h3 className="pomodoro start">pomodoro {currentPomodoro > 0 ? currentPomodoro : null}</h3>
+        <h3 className="short-break">short break {breaktype === "Short Break" ? currentShortbreak + 1 : null}</h3>
+        <h3 className="long-break">long break</h3>
       </div>
       <div className="inactive-bg">
         <div className="inactive"></div>
@@ -165,11 +167,13 @@ useEffect(() => {
         <div className="sliding-color"></div>
       </div>
       <div>
+        {/* Background with blur effect */}
         <div className = "a">
           <div className = "b">
             <div className = "c"></div>
           </div>
         </div>
+        {/* Progress bar */}
         <div className = "d">
           <div className = "e">
             <div className = "f">
@@ -178,6 +182,7 @@ useEffect(() => {
           </div>
         </div>
       </div>
+      {/* Inner circle with counter */}
       <div className = "h">
         <div className = "i"></div>
       </div>
