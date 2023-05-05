@@ -70,6 +70,15 @@ img {
   cursor: pointer;
 }
 
+img:hover {
+  animation: rotate-icon 1.5s linear infinite forwards;
+}
+
+@keyframes rotate-icon {
+  from {rotate: 0deg}
+  to {rotate: 360deg}
+}
+
 /* Heading with current active cycle */
 .active-cycle, .inactive-bg, .sliding-holder {
   position: relative;
