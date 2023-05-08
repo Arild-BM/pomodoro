@@ -58,8 +58,9 @@ body {
   justify-content: center;
   background: var(--color-body);
   font-family: var(--font-theme);
-  /* overflow: hidden; */
+  overflow: hidden;
   margin: 0;
+  user-select: none;
 }
 
 /* Icon for settings */
