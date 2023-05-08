@@ -412,6 +412,7 @@ input {
   outline: none;
   padding: 5px;
   border-radius: 5px;
+  pointer-events: none;
 }
 
 /* Wrapper for increment and decrement in input */
